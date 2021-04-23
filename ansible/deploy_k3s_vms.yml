@@ -1,0 +1,60 @@
+---
+- name: Deploy VM
+  proxmox_kvm:
+    api_user    : "{{ api_user }}"
+    api_password: "{{ api_password }}"
+    api_host    : "{{ api_host }}"
+    node        : "{{ node }}"
+    name        : "{{ name }}"
+    state: started
+
+- name: Get VMID
+  proxmox_kvm:
+    api_user    : "{{ api_user }}"
+    api_password: "{{ api_password }}"
+    api_host    : "{{ api_host }}"
+    node        : "{{ node }}"
+    name        : "{{ name }}"
+    state: current
+  register: result
+
+- name: Set VMID
+  set_fact:
+    vmid: "{{ result.msg | regex_replace('^.* = (\\d+).*?$', '\\1') }}"
+
+- name: Waiting install finish
+  pause:
+    seconds: 600
+
+- name: Stop VM
+  proxmox_kvm:
+    api_user    : "{{ api_user }}"
+    api_password: "{{ api_password }}"
+    api_host    : "{{ api_host }}"
+    node        : "{{ node }}"
+    name        : "{{ name }}"
+    state       : stopped
+    force       : yes
+
+- name: Waiting stop finish
+  pause:
+    seconds: 30
+
+- name: Remove deploy args from VM
+  proxmox_kvm:
+    api_user    : "{{ api_user }}"
+    api_password: "{{ api_password }}"
+    api_host    : "{{ api_host }}"
+    node        : "{{ node }}"
+    name        : "{{ name }}"
+    delete: args
+
+- name: Start VM (again)
+  proxmox_kvm:
+    api_user    : "{{ api_user }}"
+    api_password: "{{ api_password }}"
+    api_host    : "{{ api_host }}"
+    node        : "{{ node }}"
+    name        : "{{ name }}"
+    state: started
+...

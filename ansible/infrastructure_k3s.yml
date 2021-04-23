@@ -1,0 +1,91 @@
+---
+- name: Create Infrastructure for K3S - Dev Environment
+  become: yes
+  become_method: sudo
+  become_user: root
+  hosts: localhost
+  gather_facts: false
+
+  vars_prompt:
+  - name: "kernel"
+    prompt: "kernel? "
+    default: "http://ftp.byfly.by/pub/CentOS/7/os/x86_64/isolinux/vmlinuz"
+    private: no
+
+  - name: "initrd"
+    prompt: "initrd? "
+    default: "http://ftp.byfly.by/pub/CentOS/7/os/x86_64/isolinux/initrd.img"
+    private: no
+
+  - name: "ks_url"
+    prompt: "Kickstart URL? "
+    default: "https://raw.githubusercontent.com/netoralves/k3s-lab/ansible/ks/anaconda-ks.cfg"
+    private: no
+
+  - name: "api_host"
+    prompt: "PVE API host? "
+    default: "192.168.0.200"
+    private: no
+
+  vars:
+    args_template: "centos7-args.yml"
+    api_user: "root@pam"
+    api_password: "root123"
+    api_host: "pve-01"
+    node: "pve-01"
+
+  tasks:
+
+  - name: Create VMs
+    proxmox_kvm:
+      onboot: yes
+      proxmox_default_behavior: no_defaults
+      api_user    : "{{ api_user }}"
+      api_password: "{{ api_password }}"
+      api_host    : "{{ api_host }}"
+      node        : "{{ node }}"
+      name        : "{{ item.name }}"
+      memory      : 1024
+      sockets     : 1
+      cores       : 1
+      scsihw      : virtio-scsi-pci
+      virtio      : '{"scsi0":"vms:40,ssd=1"}'
+      ide         : '{"ide2":"local:iso/CentOS-7-x86_64-Minimal-2009.iso,media=cdrom"}'
+      net:
+        net0: 'virtio,bridge=vmbr0'
+        net1: 'virtio={{ item.mac }},bridge=vmbr1,tag=10'
+      args        : "{{ lookup('template', '{{ args_template }}') | replace('\n', ' ')}}"
+      state: present
+    with_items:
+      - { name: "k3s-master", mac: "82:58:ee:49:31:48" }
+      - { name: "k3s-node01", mac: "92:5d:d1:b3:13:1a" }
+      - { name: "k3s-node02", mac: "56:f5:0f:1b:9f:14" }
+
+  - name: Fetch kernel
+    get_url:
+      url:  "{{ kernel }}"
+      dest: "/tmp/kernel"
+    delegate_to: "{{ api_host }}"
+
+  - name: Fetch initrd
+    get_url:
+      url:  "{{ initrd }}"
+      dest: "/tmp/initrd"
+    delegate_to: "{{ api_host }}"
+
+  - name: Wait for kernel
+    wait_for:
+      path: /tmp/kernel
+    delegate_to: "{{ api_host }}"
+
+  - name: Wait for initrd
+    wait_for:
+      path: /tmp/initrd
+    delegate_to: "{{ api_host }}"
+
+  - include: deploy_k3s_vms.yml name={{item}}
+    with_items:
+      - k3s-master
+      - k3s-node01
+      - k3s-node02
+...
