@@ -19,7 +19,7 @@
 
   - name: "ks_url"
     prompt: "Kickstart URL? "
-    default: "https://raw.githubusercontent.com/netoralves/k3s-lab/ansible/ks/anaconda-ks.cfg"
+    default: "https://raw.githubusercontent.com/netoralves/k3s-lab/ansible/infrastructure/ks/anaconda-ks.cfg"
     private: no
 
   - name: "api_host"
