@@ -11,6 +11,8 @@
 # Topology
 ![](images/topology_k3s.png?raw=true)
 
+Follow DOCS in ![k3s.io](https://rancher.com/docs/k3s/latest/en/)
+
 ## Create infrastructure in your proxmox server
 	root@pve-01:~/k3s-lab# ansible-playbook ansible/infrastructure/infrastructure_k3s.yml
 	kernel?  [http://ftp.byfly.by/pub/CentOS/7/os/x86_64/isolinux/vmlinuz]:
