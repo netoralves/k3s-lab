@@ -1,5 +1,16 @@
 # k3s-lab
 
+## Virtual Environment:
+
+|  Name                  |  OS                                  |       Type       |  vCPU  |  RAM  |  Storage  |  IP Address  |
+|------------------------|--------------------------------------|------------------|--------|-------|-----------|--------------|
+|     k3s-master     |  CentOS 7.9.2009  			|  Master,Etcd     |    1   |   1  |    40    |192.168.1.100 |
+|     k3s-node01     |  CentOS 7.9.2009  			|  Worker(Node)    |    1   |   1  |    40    |192.168.1.101 |
+|  k3s-node02        |  CentOS 7.9.2009  			|  Worker(Node)    |    1   |   1  |    40    |192.168.1.102 |
+
+# Topology
+![](images/topology_k3s.png?raw=true)
+
 ## Create infrastructure in your proxmox server
 	root@pve-01:~/k3s-lab# ansible-playbook ansible/infrastructure/infrastructure_k3s.yml
 	kernel?  [http://ftp.byfly.by/pub/CentOS/7/os/x86_64/isolinux/vmlinuz]:
@@ -30,6 +41,34 @@
 	included: /root/k3s-lab/ansible/infrastructure/deploy_k3s_vms.yml for localhost => (item=k3s-master)
 	included: /root/k3s-lab/ansible/infrastructure/deploy_k3s_vms.yml for localhost => (item=k3s-node01)
 	included: /root/k3s-lab/ansible/infrastructure/deploy_k3s_vms.yml for localhost => (item=k3s-node02)
+	
+	TASK [Deploy VM] ***********************************************************************************************
+	changed: [localhost]
+	
+	TASK [Get VMID] ************************************************************************************************
+	ok: [localhost]
+	
+	TASK [Set VMID] ************************************************************************************************
+	ok: [localhost]
+	
+	TASK [Waiting install finish] **********************************************************************************
+	Pausing for 600 seconds
+	(ctrl+C then 'C' = continue early, ctrl+C then 'A' = abort)
+	ok: [localhost]
+	
+	TASK [Stop VM] *************************************************************************************************
+	changed: [localhost]
+	
+	TASK [Waiting stop finish] *************************************************************************************
+	Pausing for 30 seconds
+	(ctrl+C then 'C' = continue early, ctrl+C then 'A' = abort)
+	ok: [localhost]
+	
+	TASK [Remove deploy args from VM] ******************************************************************************
+	changed: [localhost]
+	
+	TASK [Start VM (again)] ****************************************************************************************
+	changed: [localhost]
 	
 	TASK [Deploy VM] ***********************************************************************************************
 	changed: [localhost]
