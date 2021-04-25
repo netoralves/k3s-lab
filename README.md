@@ -8,7 +8,7 @@
 |     k3s-node01     |  CentOS 7.9.2009  			|  Worker(Node)    |    1   |   1  |    40    |192.168.1.101 |
 |  k3s-node02        |  CentOS 7.9.2009  			|  Worker(Node)    |    1   |   1  |    40    |192.168.1.102 |
 
-# How it Works
+## How it Works
 ![](images/topology_k3s.png?raw=true)
 
 Follow DOCS in [k3s.io](https://rancher.com/docs/k3s/latest/en/)
