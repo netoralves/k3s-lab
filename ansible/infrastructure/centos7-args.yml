@@ -1,3 +1,3 @@
 -kernel /tmp/kernel
 -initrd /tmp/initrd
--append "ks={{ ks_url }}"
+-append "ks={{ ks_url }} hostname={{ item.name }}"
