@@ -13,7 +13,7 @@ fi
 #VARIABLES
 
 #==============================
-#MASTERS
+#K3S_CLUSTER
 MASTER="k3s-master"
 NODE01="k3s-node01"
 NODE02="k3s-node02"
@@ -46,32 +46,10 @@ sshpass -p $ROOT_PASS ssh -o StrictHostKeyChecking=no root@$host "echo '%"$USER"
 echo "COPY SSH KEY FROM $MASTER TO $host"
 su -c "sshpass -p $USER_PASS ssh-copy-id -o StrictHostKeyChecking=no $host" - $USER
 
-# INSTALL KUBELET
-cat <<EOF > /etc/yum.repos.d/kubernetes.repo
-[kubernetes]
-name=Kubernetes
-baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64
-enabled=1
-gpgcheck=1
-repo_gpgcheck=1
-gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
-EOF
-
 echo "UPDATE PACKAGES ON $host"
-su -c "ssh $host -o StrictHostKeyChecking=no sudo yum -y update; yum install -y kubelet" - $USER
+su -c "ssh $host -o StrictHostKeyChecking=no sudo yum -y update" - $USER
 done
-
-# INSTALL KUBELET
-cat <<EOF > /etc/yum.repos.d/kubernetes.repo
-[kubernetes]
-name=Kubernetes
-baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64
-enabled=1
-gpgcheck=1
-repo_gpgcheck=1
-gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
-EOF
 
 # INSTALL BASIC PACKS
 yum -y update
-yum -y install vim kubelet ansible
+yum -y install vim ansible
