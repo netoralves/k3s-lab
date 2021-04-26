@@ -18,9 +18,14 @@ Follow DOCS in [k3s.io](https://rancher.com/docs/k3s/latest/en/)
 
 ## Deploy K3S Cluster
 
-### Include k3s user without password
-	[k3s@k3s-master ~]$ sudo cat /etc/sudoers.d/k3s
-	k3s ALL=(ALL) NOPASSWD:ALL
+
+### Loging in k3s-master and execute basic-script.sh to prepare environment
+	[k3s@k3s-master ~]$ sudo yum install git
+        [k3s@k3s-master ~]$ sudo -i
+	[root@k3s-master ~]# git clone https://github.com/netoralves/k3s-lab.git
+	[root@k3s-master ~]# cd k3s-lab
+	[root@k3s-master k3s-lab]# chmod +x basic-config.sh
+	[root@k3s-master k3s-lab]# ./basic-config.sh
 
 ### 
 	
