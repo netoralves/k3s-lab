@@ -61,3 +61,6 @@ rsync -zvh /etc/ansible/ansible.cfg /etc/ansible/ansible.cfg_backup$(date '+%Y%m
 # CUSTOM FILE ANSIBLE
 rsync -zvh /root/k3s-lab/ansible/k3s/templates/hosts /etc/ansible/hosts
 rsync -zvh /root/k3s-lab/ansible/k3s/templates/ansible.cfg /etc/ansible/ansible.cfg
+
+# GRANT PRIVILEGIES
+chown k3s:k3s /etc/ansible -R
