@@ -62,11 +62,10 @@ rsync -zvh /etc/ansible/ansible.cfg /etc/ansible/ansible.cfg_backup$(date '+%Y%m
 rsync -zvh /root/k3s-lab/ansible/k3s/templates/hosts /etc/ansible/hosts
 rsync -zvh /root/k3s-lab/ansible/k3s/templates/ansible.cfg /etc/ansible/ansible.cfg
 
-# ROLES AND PLAYBOOKS INSTALLATION
+# ROLES AND PLAYBOOKS CONFIG TO INSTALLATION
 rsync -a /root/k3s-lab/ansible/k3s/roles/ /etc/ansible/roles
-rsync -a /root/k3s-lab/ansible/k3s/group_vars /etc/ansible/roles
+rsync -a /root/k3s-lab/ansible/k3s/group_vars /etc/ansible/
 rsync -zvh /root/k3s-lab/ansible/k3s/deploy.yml /etc/ansible/deploy.yml
-
 
 # GRANT PRIVILEGIES
 chown k3s:k3s /etc/ansible -R
