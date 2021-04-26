@@ -20,7 +20,7 @@ Follow DOCS in [k3s.io](https://rancher.com/docs/k3s/latest/en/)
 
 
 ### Loging in k3s-master and execute basic-script.sh to prepare environment
-	[k3s@k3s-master ~]$ sudo yum install git
+	[k3s@k3s-master ~]$ sudo yum install git sshpass
 	[k3s@k3s-master ~]$ sudo -i
 	[root@k3s-master ~]# git clone https://github.com/netoralves/k3s-lab.git
 	[root@k3s-master ~]# cd k3s-lab
