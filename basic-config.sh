@@ -52,4 +52,4 @@ done
 
 # INSTALL BASIC PACKS
 yum -y update
-yum -y install vim centos-release-ansible-29
+yum -y install vim centos-release-ansible-29 ansible
