@@ -67,4 +67,16 @@ Follow DOCS in [k3s.io](https://rancher.com/docs/k3s/latest/en/)
 	    },
 	    "changed": false,
 	    "ping": "pong"
-	} 
+	}
+
+### Deploy K3S Cluster
+	[k3s@k3s-master ~]$ cd /etc/ansible/
+	[k3s@k3s-master ansible]$ ansible-playbook deploy.yml
+
+### Validate environment
+	[k3s@k3s-master k3s]$ sudo -i
+	[root@k3s-master ~]# kubectl get nodes
+	NAME         STATUS   ROLES         AGE     VERSION
+	k3s-master   Ready    etcd,master   7m14s   v1.19.10+k3s1
+	k3s-node01   Ready    <none>        6m29s   v1.19.10+k3s1
+	k3s-node02   Ready    <none>        6m30s   v1.19.10+k3s1
