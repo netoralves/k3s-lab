@@ -1,0 +1,7 @@
+---
+k3s_version: v1.19.10+k3s1
+ansible_user: k3s
+systemd_dir: /etc/systemd/system
+master_ip: "{{ hostvars[groups['master'][0]]['ansible_host'] | default(groups['master'][0]) }}"
+extra_server_args: "--datastore-endpoint etcd --flannel-iface eth1"
+extra_agent_args: "--flannel-iface eth1"
