@@ -27,7 +27,7 @@ Follow DOCS in [k3s.io](https://rancher.com/docs/k3s/latest/en/)
 	[root@k3s-master k3s-lab]# chmod +x basic-config.sh
 	[root@k3s-master k3s-lab]# ./basic-config.sh
 
-### Validate the access
+### Validate the access and ansible version
 	[root@k3s-master k3s-lab]# logout
 	[k3s@k3s-master ~]$ ssh k3s-node01
 	Last login: Mon Apr 26 09:59:16 2021 from k3s-master.ocp.local
