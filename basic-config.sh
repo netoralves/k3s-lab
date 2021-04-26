@@ -53,3 +53,11 @@ done
 # INSTALL BASIC PACKS
 yum -y update
 yum -y install vim centos-release-ansible-29 ansible
+
+# BACKUP ANSIBLE
+rsync -zvh /etc/ansible/hosts /etc/ansible/hosts_backup$(date '+%Y%m%d%H%M%S')
+rsync -zvh /etc/ansible/ansible.cfg /etc/ansible/ansible.cfg_backup$(date '+%Y%m%d%H%M%S')
+
+# CUSTOM FILE ANSIBLE
+rsync -zvh /root/k3s-lab/ansible/k3s/templates/hosts /etc/ansible/hosts
+rsync -zvh /root/k3s-lab/ansible/k3s/templates/ansible.cfg /etc/ansible/ansible.cfg
