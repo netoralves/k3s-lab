@@ -45,5 +45,26 @@ Follow DOCS in [k3s.io](https://rancher.com/docs/k3s/latest/en/)
 	  executable location = /usr/bin/ansible
 	  python version = 2.7.5 (default, Nov 16 2020, 22:23:17) [GCC 4.8.5 20150623 (Red Hat 4.8.5-44)]
 
-### 
-	
+### Ping inventory
+	[k3s@k3s-master ~]$ ansible all -m ping --become
+	k3s-node01 | SUCCESS => {
+	    "ansible_facts": {
+	        "discovered_interpreter_python": "/usr/bin/python"
+	    },
+	    "changed": false,
+	    "ping": "pong"
+	}
+	k3s-node02 | SUCCESS => {
+	    "ansible_facts": {
+	        "discovered_interpreter_python": "/usr/bin/python"
+	    },
+	    "changed": false,
+	    "ping": "pong"
+	}
+	k3s-master | SUCCESS => {
+	    "ansible_facts": {
+	        "discovered_interpreter_python": "/usr/bin/python"
+	    },
+	    "changed": false,
+	    "ping": "pong"
+	} 
