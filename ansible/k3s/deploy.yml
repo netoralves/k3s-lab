@@ -10,9 +10,9 @@
 - hosts: master
   become: yes
   roles:
-    - role: k3s/master
+    - role: master
 
 - hosts: node
   become: yes
   roles:
-    - role: k3s/node
+    - role: node

@@ -2,3 +2,10 @@
 k3s-master
 k3s-node01
 k3s-node02
+
+[master]
+k3s-master
+
+[node]
+k3s-node01
+k3s-node02
