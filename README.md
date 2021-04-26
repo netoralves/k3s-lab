@@ -27,5 +27,16 @@ Follow DOCS in [k3s.io](https://rancher.com/docs/k3s/latest/en/)
 	[root@k3s-master k3s-lab]# chmod +x basic-config.sh
 	[root@k3s-master k3s-lab]# ./basic-config.sh
 
+### Validate the access
+	[k3s@k3s-master ~]$ ssh k3s-node01
+	Last login: Mon Apr 26 09:59:16 2021 from k3s-master.ocp.local
+	[k3s@k3s-node01 ~]$ logout
+	Connection to k3s-node01 closed.
+	[k3s@k3s-master ~]$ ssh k3s-node02
+	Last login: Mon Apr 26 09:59:19 2021 from k3s-master.ocp.local
+	[k3s@k3s-node02 ~]$ logout
+	Connection to k3s-node02 closed.
+	[k3s@k3s-master ~]$ 
+
 ### 
 	
