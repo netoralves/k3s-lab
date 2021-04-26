@@ -17,3 +17,10 @@ Follow DOCS in [k3s.io](https://rancher.com/docs/k3s/latest/en/)
 	root@pve-01:~/k3s-lab# ansible-playbook ansible/infrastructure/infrastructure_k3s.yml
 
 ## Deploy K3S Cluster
+
+### Include k3s user without password
+	[k3s@k3s-master ~]$ sudo cat /etc/sudoers.d/k3s
+	k3s ALL=(ALL) NOPASSWD:ALL
+
+### 
+	
